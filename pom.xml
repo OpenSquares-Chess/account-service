@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.project</groupId>
-	<artifactId>distributed-online-chess</artifactId>
+	<artifactId>account-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>distributed-online-chess</name>
+	<name>account-service</name>
 	<description>Chess project for Spring Boot</description>
 	<url/>
 	<licenses>

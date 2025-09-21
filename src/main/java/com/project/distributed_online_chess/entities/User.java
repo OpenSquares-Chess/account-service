@@ -1,9 +1,9 @@
 package com.project.distributed_online_chess.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class User {
 
     @Id

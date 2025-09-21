@@ -16,7 +16,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         var user = User.withUsername("user")
-                .password("{noop}password")  // {noop} means no encoding
+                .password("{noop}password")
                 .roles("USER")
                 .build();
 
@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/public").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()); // Enable basic auth
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

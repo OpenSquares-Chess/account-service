@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/public")
     public String publicEndpoint() {
         return "Public endpoint.";

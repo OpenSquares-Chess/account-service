@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService implements IUserService {
@@ -24,9 +25,7 @@ public class UserService implements IUserService {
         return new User(
                 user.getUsername(),
                 user.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRoles()))
         );
     }
-
-
 }

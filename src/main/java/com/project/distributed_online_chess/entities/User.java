@@ -3,6 +3,8 @@ package com.project.distributed_online_chess.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Set;
+
 @Document
 public class User {
 
@@ -11,9 +13,17 @@ public class User {
 
     private String username;
     private String password;
-    private String role = "USER";
+
+    private Set<String> roles;
 
     public User() {
+    }
+
+    public User(String id, String username, String password, Set<String> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
     public String getId() { return id; }
@@ -24,6 +34,11 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 }

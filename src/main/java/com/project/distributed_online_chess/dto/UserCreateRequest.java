@@ -6,5 +6,6 @@ import java.util.Set;
 
 public record UserCreateRequest (
         String username,
-        String subid
+        String profileImage,
+        String subId
 ) {}

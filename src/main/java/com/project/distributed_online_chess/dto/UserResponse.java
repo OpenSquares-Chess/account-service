@@ -6,5 +6,7 @@ import java.util.Set;
 
 public record UserResponse (
         String id,
-        String username
+        String username,
+        String profileImage,
+        String subId
 ) {}

@@ -25,14 +25,18 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse create(@RequestBody UserCreateRequest req) {
         if (req == null
-                || req.username() == null || req.username().isBlank()
-                || req.subid() == null   || req.subid().isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username and subId are required");
+                ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if(repo.existsBySubId(req.subId())){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account already exists.");
         }
 
         User user = new User();
         user.setUsername(req.username());
-        user.setSubid(req.subid());
+        user.setSubId(req.subId());
+        user.setProfileImage(req.profileImage());
 
         repo.save(user);
         return toResponse(user);
@@ -47,6 +51,6 @@ public class UserController {
     }
 
     private UserResponse toResponse(User u) {
-        return new UserResponse(u.getUuid(), u.getUsername());
+        return new UserResponse(u.getId(), u.getUsername(), u.getSubId(), u.getProfileImage());
     }
 }

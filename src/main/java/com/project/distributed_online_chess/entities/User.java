@@ -9,27 +9,27 @@ import java.util.Set;
 public class User {
 
     @Id
-    private String uuid;
+    private String id;
     private String username;
-    private byte[] profileImage;
-    private String subid;
+    private String profileImage;
+    private String subId;
 
     public User() {
     }
 
-    public User(String uuid, String username, byte[] profileImage, String subid) {
-        this.uuid = uuid;
+    public User(String id, String username, String profileImage, String subId) {
+        this.id = id;
         this.username = username;
         this.profileImage = profileImage;
-        this.subid = subid;
+        this.subId = subId;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String uuid) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -40,19 +40,19 @@ public class User {
         this.username = username;
     }
 
-    public byte[] getProfileImage() {
+    public String getProfileImage() {
         return profileImage;
     }
 
-    public void setProfileImage(byte[] profileImage) {
+    public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
 
-    public String getSubid() {
-        return subid;
+    public String getSubId() {
+        return subId;
     }
 
-    public void setSubid(String subid) {
-        this.subid = subid;
+    public void setSubId(String subId) {
+        this.subId = subId;
     }
 }

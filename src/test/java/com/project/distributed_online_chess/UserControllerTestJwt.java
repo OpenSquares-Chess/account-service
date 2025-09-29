@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -13,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@Import(MongoTestConfig.class)
-public class UserControllerTest {
+public class UserControllerTestJwt {
 
     @Mock
     private Jwt jwt;
@@ -27,6 +25,7 @@ public class UserControllerTest {
 
     @Test
     void testGetCurrentUserId_ValidJwt() {
+
         // Arrange
         when(authentication.getPrincipal()).thenReturn(jwt);
         when(jwt.getSubject()).thenReturn("12345");
@@ -43,6 +42,7 @@ public class UserControllerTest {
 
     @Test
     void testGetCurrentUserId_InvalidJwt() {
+
         // Arrange
         when(authentication.getPrincipal()).thenReturn(jwt);
         when(jwt.getSubject()).thenReturn(null);
@@ -58,6 +58,7 @@ public class UserControllerTest {
 
     @Test
     void testGetCurrentUserId_NoAuthentication() {
+
         // Arrange
         SecurityContextHolder.getContext().setAuthentication(null);
 

@@ -1,29 +1,17 @@
 package com.project.distributed_online_chess.service;
 
-
 import com.project.distributed_online_chess.dao.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
-
-
-import java.util.Collections;
-import java.util.List;
-
 
 @Service
 public class UserService  {
 
-
     @Autowired
     private UserRepository userRepository;
-
 
     public String getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,5 +21,4 @@ public class UserService  {
         }
         return null;
     }
-
 }

@@ -34,16 +34,4 @@ public class UserService  {
         return null;
     }
 
-
-    //    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        com.project.distributed_online_chess.entities.User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//
-//        return new User(
-//                user.getUsername(),
-//                user.getPassword(),
-//                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRoles()))
-//        );
-//    }
 }

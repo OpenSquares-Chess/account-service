@@ -1,80 +1,70 @@
 package com.project.distributed_online_chess;
-import com.project.distributed_online_chess.controller.UserController;
-import com.project.distributed_online_chess.dao.UserRepository;
-import com.project.distributed_online_chess.dto.UserCreateRequest;
-import com.project.distributed_online_chess.dto.UserResponse;
-import com.project.distributed_online_chess.entities.User;
-import org.junit.jupiter.api.BeforeEach;
+import com.project.distributed_online_chess.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-@WebMvcTest(UserController.class)
+@SpringBootTest
 @Import(MongoTestConfig.class)
 public class UserControllerTest {
 
-    @InjectMocks
-    private UserController userController;
+    @Mock
+    private Jwt jwt;
 
     @Mock
-    private UserRepository userRepository;
+    private Authentication authentication;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    @InjectMocks
+    private UserService userService;
 
     @Test
-    public void testCreateUser_Success() {
-
+    void testGetCurrentUserId_ValidJwt() {
         // Arrange
-        UserCreateRequest req = new UserCreateRequest("UserOne", "12345", "pic.jpg");
+        when(authentication.getPrincipal()).thenReturn(jwt);
+        when(jwt.getSubject()).thenReturn("12345");
 
-        when(userRepository.existsBySubId("12345")).thenReturn(false);
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Act
-        UserResponse response = userController.create(req);
+        String userId = userService.getCurrentUserId();
 
         // Assert
-        assertNotNull(response);
-        assertEquals("UserOne", response.username());
-        assertEquals("12345", response.subId());
-        assertEquals("pic.jpg", response.profileImage());
-        verify(userRepository).save(any(User.class));
-
+        assertNotNull(userId);
+        assertEquals("12345", userId);
     }
 
     @Test
-    public void testCreateUser_NullRequest_ThrowsBadRequest() {
-        // Act & Assert
-        ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> {
-            userController.create(null);
-        });
-
-        assertEquals(400, ex.getStatusCode().value());
-    }
-
-    @Test
-    public void testCreateUser_AlreadyExists_ThrowsConflict() {
+    void testGetCurrentUserId_InvalidJwt() {
         // Arrange
-        UserCreateRequest req = new UserCreateRequest("UserOne", "12345", "pic.jpg");
-        when(userRepository.existsBySubId("UserOne")).thenReturn(true);
+        when(authentication.getPrincipal()).thenReturn(jwt);
+        when(jwt.getSubject()).thenReturn(null);
 
-        // Act & Assert
-        ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> {
-            userController.create(req);
-        });
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        assertEquals(409, ex.getStatusCode().value());
-        assertEquals("Account already exists.", ex.getReason());
+        // Act
+        String userId = userService.getCurrentUserId();
+
+        // Assert
+        assertNull(userId);
     }
 
+    @Test
+    void testGetCurrentUserId_NoAuthentication() {
+        // Arrange
+        SecurityContextHolder.getContext().setAuthentication(null);
+
+        // Act
+        String actualUserId = userService.getCurrentUserId();
+
+        // Assert
+        assertNull(actualUserId);
+    }
 }

@@ -77,8 +77,6 @@ public class UserController {
     }
 
 
-
-
     private UserResponse toResponse(User u) {
         return new UserResponse(u.getId(), u.getUsername(), u.getProfileImage(), u.getSubId());
     }

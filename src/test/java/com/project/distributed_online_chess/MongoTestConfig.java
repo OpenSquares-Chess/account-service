@@ -13,6 +13,6 @@ public class MongoTestConfig {
     public MongoTemplate mongoTemplate() {
         
         MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-        return new MongoTemplate(mongoClient, "test_db"); // 'test_db' can be your test DB
+        return new MongoTemplate(mongoClient, "test_db");
     }
 }

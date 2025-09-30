@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class UserControllerTestJwt {
+public class userControllerTestJwt {
 
     @Mock
     private Jwt jwt;

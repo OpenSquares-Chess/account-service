@@ -1,6 +1,6 @@
-package com.project.distributed_online_chess.dao;
+package com.project.account_service.dao;
 
-import com.project.distributed_online_chess.entities.User;
+import com.project.account_service.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

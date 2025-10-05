@@ -1,4 +1,4 @@
-package com.project.distributed_online_chess.entities;
+package com.project.account_service.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

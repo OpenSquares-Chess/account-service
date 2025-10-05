@@ -1,4 +1,4 @@
-package com.project.distributed_online_chess.config;
+package com.project.account_service.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;

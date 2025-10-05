@@ -1,6 +1,6 @@
-package com.project.distributed_online_chess.service;
+package com.project.account_service.service;
 
-import com.project.distributed_online_chess.dao.UserRepository;
+import com.project.account_service.dao.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;

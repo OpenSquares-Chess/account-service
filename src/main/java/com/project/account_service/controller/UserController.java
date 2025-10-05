@@ -1,10 +1,10 @@
-package com.project.distributed_online_chess.controller;
+package com.project.account_service.controller;
 
-import com.project.distributed_online_chess.dao.UserRepository;
-import com.project.distributed_online_chess.dto.UserCreateRequest;
-import com.project.distributed_online_chess.dto.UserResponse;
-import com.project.distributed_online_chess.entities.User;
-import com.project.distributed_online_chess.service.UserService;
+import com.project.account_service.dao.UserRepository;
+import com.project.account_service.dto.UserCreateRequest;
+import com.project.account_service.dto.UserResponse;
+import com.project.account_service.entities.User;
+import com.project.account_service.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;

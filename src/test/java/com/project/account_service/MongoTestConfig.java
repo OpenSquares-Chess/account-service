@@ -1,4 +1,4 @@
-package com.project.distributed_online_chess;
+package com.project.account_service;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

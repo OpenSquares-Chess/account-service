@@ -1,5 +1,5 @@
-package com.project.distributed_online_chess;
-import com.project.distributed_online_chess.service.UserService;
+package com.project.account_service;
+import com.project.account_service.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

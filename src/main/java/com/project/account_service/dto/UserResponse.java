@@ -1,4 +1,4 @@
-package com.project.distributed_online_chess.dto;
+package com.project.account_service.dto;
 
 public record UserResponse (
         String id,

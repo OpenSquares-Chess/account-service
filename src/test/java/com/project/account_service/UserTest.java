@@ -1,5 +1,5 @@
-package com.project.distributed_online_chess;
-import com.project.distributed_online_chess.entities.User;
+package com.project.account_service;
+import com.project.account_service.entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -12,7 +12,8 @@ public class GameInformation {
     private int gameId;
     private String playerWhiteId;
     private String playerBlackId;
-    private String rating;
+    private String playerWHRating;
+    private String playerBLRating;
     private String date;
 
     private List<GameMove> gameMoves;
@@ -20,11 +21,12 @@ public class GameInformation {
     public GameInformation() {
     }
 
-    public GameInformation(int gameId, String playerWhiteId, String playerBlackId, String rating, String date, List<GameMove> gameMoves) {
+    public GameInformation(int gameId, String playerWhiteId, String playerBlackId, String playerWHRating, String playerBLRating, String date, List<GameMove> gameMoves) {
         this.gameId = gameId;
         this.playerWhiteId = playerWhiteId;
         this.playerBlackId = playerBlackId;
-        this.rating = rating;
+        this.playerWHRating = playerWHRating;
+        this.playerBLRating = playerBLRating;
         this.date = date;
         this.gameMoves = gameMoves;
     }
@@ -53,12 +55,20 @@ public class GameInformation {
         this.playerBlackId = playerBlackId;
     }
 
-    public String getRating() {
-        return rating;
+    public String getPlayerWHRating() {
+        return playerWHRating;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setPlayerWHRating(String playerWHRating) {
+        this.playerWHRating = playerWHRating;
+    }
+
+    public String getPlayerBLRating() {
+        return playerBLRating;
+    }
+
+    public void setPlayerBLRating(String playerBLRating) {
+        this.playerBLRating = playerBLRating;
     }
 
     public String getDate() {

@@ -19,12 +19,12 @@ public class GameInfoController {
         this.gameRepo = gameRepo;
     }
 
-    @PostMapping
-    public GameResponse SaveGameInfo(@RequestBody GameInformation gameInfo) {
-
-        gameRepo.save(gameInfo);
-        return toResponse(gameInfo);
-    }
+//    @PostMapping
+//    public GameResponse SaveGameInfo(@RequestBody GameInformation gameInfo) {
+//
+//        gameRepo.save(gameInfo);
+//        return toResponse(gameInfo);
+//    }
 
 
 }

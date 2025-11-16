@@ -91,6 +91,12 @@ public class UserController {
         return toResponse(u);
     }
 
+    @GetMapping("/{subId}")
+    public UserResponse getBySubId(@PathVariable String subId) {
+        User u = repo.findBySubId(subId).orElseThrow(()  -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return toResponse(u);
+    }
+
     private UserResponse toResponse(User u) {
         return new UserResponse(u.getId(), u.getUsername(), u.getProfileImage(), u.getSubId());
     }

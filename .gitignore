@@ -37,3 +37,6 @@ flake.nix
 flake.lock
 .envrc
 .direnv
+
+### MacOS Metadata ###
+.DS_Store

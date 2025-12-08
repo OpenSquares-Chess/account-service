@@ -7,6 +7,7 @@ public record GameResponse (
         int playerOneRating,
         int playerTwoRating,
         String date,
-        String pgn
+        String pgn,
+        String result
 )
 {}

@@ -15,8 +15,9 @@ public class Game {
     private int playerTwoRating;
     private String date;
     private String pgn;
+    private String result;
 
-    public Game(String gameId, String playerOneId, String playerTwoId, int playerOneRating, int playerTwoRating, String date, String pgn) {
+    public Game(String gameId, String playerOneId, String playerTwoId, int playerOneRating, int playerTwoRating, String date, String pgn, String result) {
         this.gameId = gameId;
         this.playerOneId = playerOneId;
         this.playerTwoId = playerTwoId;
@@ -24,6 +25,7 @@ public class Game {
         this.playerTwoRating = playerTwoRating;
         this.date = date;
         this.pgn = pgn;
+        this.result = result;
     }
 
     public String getGameId() {
@@ -48,5 +50,8 @@ public class Game {
 
     public String getPgn() {return pgn;}
     public void setPgn(String pgn) {this.pgn = pgn;}
+
+    public String getResult() {return result;}
+    public void setResult(String result) {this.result = result;}
 
 }

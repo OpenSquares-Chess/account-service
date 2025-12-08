@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class GameService {
@@ -20,28 +19,5 @@ public class GameService {
     public Page<Game> getGameHistory(String userId, int page, int size) {
         var pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, ("date")));
         return gameRepository.findByUserId(userId, pageable);
-    }
-
-    public GameResponse createGame(GameCreateRequest request) {
-        Game game = new Game(
-                null,
-                request.playerOneId(),
-                request.playerTwoId(),
-                request.playerOneRating(),
-                request.playerTwoRating(),
-                request.date(),
-                request.pgn()
-        );
-
-        Game savedGame = gameRepository.save(game);
-        return new GameResponse(
-                savedGame.getGameId(),
-                savedGame.getPlayerOneId(),
-                savedGame.getPlayerTwoId(),
-                savedGame.getPlayerOneRating(),
-                savedGame.getPlayerTwoRating(),
-                savedGame.getDate(),
-                savedGame.getPgn()
-        );
     }
 }

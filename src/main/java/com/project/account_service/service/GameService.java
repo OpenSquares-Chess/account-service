@@ -1,6 +1,8 @@
 package com.project.account_service.service;
 
 import com.project.account_service.dao.GameRepository;
+import com.project.account_service.dto.GameCreateRequest;
+import com.project.account_service.dto.GameResponse;
 import com.project.account_service.entities.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

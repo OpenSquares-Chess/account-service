@@ -1,0 +1,15 @@
+package com.project.account_service.dto;
+
+public record GameResponse (
+        String gameId,
+        String playerOneId,
+        String playerTwoId,
+        int playerOneRating,
+        int playerTwoRating,
+        String playerOneUsername,
+        String playerTwoUsername,
+        String date,
+        String pgn,
+        String result
+)
+{}

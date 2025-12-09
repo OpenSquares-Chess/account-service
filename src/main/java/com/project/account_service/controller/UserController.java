@@ -95,12 +95,6 @@ public class UserController {
         return toResponse(u);
     }
 
-    @GetMapping("/{subId}")
-    public UserResponse getBySubId(@PathVariable String subId) {
-        User u = repo.findBySubId(subId).orElseThrow(()  -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return toResponse(u);
-    }
-
     @GetMapping("/{userId}/history")
     public Page<GameResponse> getUserGames(@PathVariable String userId,
                                            @RequestParam(defaultValue = "0") int page,

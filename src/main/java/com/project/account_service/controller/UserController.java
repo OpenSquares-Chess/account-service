@@ -1,5 +1,8 @@
 package com.project.account_service.controller;
 
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.representations.idm.UserRepresentation;
 import com.project.account_service.dao.UserRepository;
 import com.project.account_service.dto.UserCreateRequest;
 import com.project.account_service.dto.UserResponse;
@@ -10,17 +13,28 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    @Value("${keycloak.realm}")
+    private String realm;
+
     private final UserRepository repo;
     private final UserService userService;
+    private final Keycloak keycloakAdminClient;
 
-    public UserController(UserRepository repo, UserService userService) {
+    public UserController(UserRepository repo, UserService userService, Keycloak keycloakAdminClient) {
         this.repo = repo;
         this.userService = userService;
+        this.keycloakAdminClient = keycloakAdminClient;
     }
 
     // POST /users
@@ -44,6 +58,19 @@ public class UserController {
         user.setProfileImage(req.profileImage());
 
         repo.save(user);
+
+        try {
+            UserResource userResource = keycloakAdminClient.realm(realm).users().get(user.getSubId());
+            UserRepresentation userRep = userResource.toRepresentation();
+            Map<String, List<String>> attributes = userRep.getAttributes() != null ? userRep.getAttributes() : new HashMap<>();
+            attributes.put("accountId", List.of(user.getId()));
+            userRep.setAttributes(attributes);
+            userResource.update(userRep);
+        } catch (Exception e) {
+            repo.delete(user);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         return toResponse(user);
     }
 

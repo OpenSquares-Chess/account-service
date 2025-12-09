@@ -17,8 +17,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Value;
-
-import java.util.ArrayList;
+import com.project.account_service.dto.GameResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,13 +102,37 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/history")
-    public Page<Game> getUserGames(@PathVariable String userId,
-                                   @RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "20") int size
+    public Page<GameResponse> getUserGames(@PathVariable String userId,
+                                           @RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "20") int size
     ) {
         repo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return gameService.getGameHistory(userId, page, size);
+
+        Page<Game> games = gameService.getGameHistory(userId, page, size);
+
+        return games.map(game -> {
+            String player1Username = repo.findById(game.getPlayerOneId())
+                    .map(User::getUsername)
+                    .orElse("Unknown");
+
+            String player2Username = repo.findById(game.getPlayerTwoId())
+                    .map(User::getUsername)
+                    .orElse("Unknown");
+
+            return new GameResponse(
+                    game.getGameId(),
+                    game.getPlayerOneId(),
+                    game.getPlayerTwoId(),
+                    game.getPlayerOneRating(),
+                    game.getPlayerTwoRating(),
+                    player1Username,
+                    player2Username,
+                    game.getDate(),
+                    game.getPgn(),
+                    game.getResult()
+            );
+        });
     }
 
     private UserResponse toResponse(User u) {

@@ -6,6 +6,8 @@ public record GameResponse (
         String playerTwoId,
         int playerOneRating,
         int playerTwoRating,
+        String playerOneUsername,
+        String playerTwoUsername,
         String date,
         String pgn,
         String result
